@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Intended as a nodejs app in a snap",
   "license": "GPL-3.0",
-  "author": "Sergio Schvezov <sergio.schvezov@canonical.com>",
+  "author": "Bogdan Rus <rusbogdanclaudiu@gmail.com>",
   "private": true,
   "bin": "./hello-world.js"
 }
