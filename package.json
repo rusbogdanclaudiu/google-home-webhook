@@ -5,5 +5,8 @@
   "license": "GPL-3.0",
   "author": "Bogdan Rus <rusbogdanclaudiu@gmail.com>",
   "private": true,
-  "bin": "./hello-world.js"
+  "bin": "./hello-world.js",
+ "dependencies": {
+    "node-syslog": "1.2.0"
+  }
 }
