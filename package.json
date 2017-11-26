@@ -7,6 +7,6 @@
   "private": true,
   "bin": "./hello-world.js",
  "dependencies": {
-    "node-syslog": "1.2.0"
+    "syslog-client": "*"
   }
 }
