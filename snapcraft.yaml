@@ -9,7 +9,7 @@ confinement: devmode
 
 apps:
   hello-service:
-    command: hello-world
+    command: index
     daemon: simple
 
 parts:
