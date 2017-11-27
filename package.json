@@ -1,12 +1,18 @@
 {
-  "name": "hello-world",
+  "name": "voyc-home-control-webhook",
   "version": "0.0.1",
   "description": "Intended as a nodejs app in a snap",
   "license": "GPL-3.0",
   "author": "Bogdan Rus <rusbogdanclaudiu@gmail.com>",
   "private": true,
-  "bin": "./hello-world.js",
+  "bin": "./index.js",
+  "main": "./index.js",
+  "scripts": {
+    "start" : "node index.js"
+  },
  "dependencies": {
-    "syslog-client": "*"
+    "syslog-client": "*",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4"
   }
 }
