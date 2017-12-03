@@ -9,7 +9,7 @@ confinement: devmode
 
 apps:
   hello-service:
-    command: voyc-home-control-webhook
+    command: voyc-home
     daemon: simple
 
 parts:

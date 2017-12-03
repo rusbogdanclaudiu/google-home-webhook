@@ -1,37 +1,41 @@
 #!/usr/bin/env node
-
 require('rconsole');
-var sys = console;
-sys.set({ facility : 'local0', title: 'basic' });
+console.set({ facility : 'local0', title: 'basic' });
 
 const express = require('express');
 const bodyParser = require('body-parser');
 
 
-const restService = express();
-restService.use(bodyParser.json());
+const app = express();
 
-restService.get('/', function (req, res) {
+var godaddy = require('./godaddy')
+app.use('/godaddy/', godaddy);
+godaddy.startWatchdog("http://voyc.eu/godaddy/", 15000);
+//godaddy.startWatchdog("http://127.0.0.1/godaddy/", 100);
+
+app.use(bodyParser.json());
+
+app.get('/', function (req, res) {
     res.writeHead(200, {"Content-Type": "text/plain"});
-    res.end("Hello snapcrafter\n");
-    sys.log('index request');
+    res.end("Hello snapcrafter, with godaddy A record setup\n");
+    console.log('index request');
 });
 
-restService.post('/hook', function (req, res) {
+app.post('/hook', function (req, res) {
 
-    sys.log('hook request');
+    console.log('hook request');
 
     try {
 
         if (req.body) {
             var requestBody = req.body;
-            sys.log(requestBody);
+            console.log(requestBody);
         }
 
         return res.json({
         });
     } catch (err) {
-        sys.log("Can't process request: " + err);
+        console.log("Can't process request: " + err);
 
         return res.status(400).json({
             status: {
@@ -42,6 +46,6 @@ restService.post('/hook', function (req, res) {
     }
 });
 
-restService.listen((process.env.PORT || 80), function () {
-    sys.log("Server listening");
+app.listen((process.env.PORT || 80), function () {
+    console.log("Server listening");
 });

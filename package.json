@@ -1,5 +1,5 @@
 {
-  "name": "voyc-home-control-webhook",
+  "name": "voyc-home",
   "version": "0.0.1",
   "description": "Intended as a nodejs app in a snap",
   "license": "GPL-3.0",
@@ -8,7 +8,9 @@
   "bin": "./index.js",
   "main": "./index.js",
   "scripts": {
-    "start" : "PORT=8080 node index.js"
+    "start" : "PORT=8080 node index.js",
+    "http-nat-setup" : "sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080",
+    "reset-A-record" : "/bin/sh godaddy.sh ~/godaddy.token"
   },
  "dependencies": {
     "rconsole": "*",
