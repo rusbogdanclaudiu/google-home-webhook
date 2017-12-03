@@ -21,7 +21,8 @@ router.startWatchdog = function(path, timer) {
     monitorId = 0;
 
     function init() {
-        fs.readFile(process.env.HOME + '/godaddy.token', 'utf8', function (err,data) {
+        godaddyTokenPath = process.env.SNAP_COMMON || "~";
+        fs.readFile(godaddyTokenPath + '/godaddy.token', 'utf8', function (err,data) {
             if (err) {
                 return console.log(err);
             }
