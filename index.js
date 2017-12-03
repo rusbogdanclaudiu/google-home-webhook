@@ -42,6 +42,6 @@ restService.post('/hook', function (req, res) {
     }
 });
 
-restService.listen((process.env.PORT || 8001), function () {
+restService.listen((process.env.PORT || 80), function () {
     sys.log("Server listening");
 });
