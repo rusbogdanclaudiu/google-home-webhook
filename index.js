@@ -7,10 +7,19 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-var godaddy = require('./godaddy')
-app.use('/godaddy/', godaddy);
-godaddy.startWatchdog("http://voyc.eu/godaddy/", 15000);
-//godaddy.startWatchdog("http://127.0.0.1/godaddy/", 100);
+var localStaticServePath = process.env.SNAP_COMMON || process.env.HOME;
+localStaticServePath += '/voyc-static-content';
+app.use(express.static(localStaticServePath));
+
+if(!process.env.DISABLE_GO_DADDY) {
+    var godaddy = require('./godaddy');
+    app.use('/godaddy/', godaddy);
+    godaddy.startWatchdog('http://voyc.eu/godaddy/', 15000);
+    //godaddy.startWatchdog('http://127.0.0.1/godaddy/', 100);    
+}
+
+var letsencrypt = require('./letsencrypt');
+letsencrypt.init(app);
 
 app.use(bodyParser.json());
 
