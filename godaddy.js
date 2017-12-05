@@ -93,8 +93,11 @@ router.startWatchdog = function(path, timer) {
                     recoveryActive = false;
 
                     res.on('data', (d) => { data += d; });
-                    res.on('end', ()=> { console.log("godaddy: recovery response : " + data); });
-
+                    res.on('end', ()=> {
+                        console.log('godaddy: recovery response : ' + data); 
+                        console.log('godaddy recovery ended, restarting node..');
+                        process.exit(-1);
+                    });
                 });        
                 req.on('error', (e) => {
                     console.error('godaddy: error in recovery: ' + e);

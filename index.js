@@ -5,7 +5,6 @@ console.set({ facility : 'local0', title: 'basic' });
 const express = require('express');
 const bodyParser = require('body-parser');
 
-
 const app = express();
 
 var godaddy = require('./godaddy')
