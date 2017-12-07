@@ -61,8 +61,9 @@ if(process.env.LOCAL_TEST_SERVER) {
     });
 } else {
     //https://git.daplie.com/Daplie/greenlock-express
+    //testing server: staging
     require('greenlock-express').create({
-        server: 'staging',
+        server: 'https://acme-v01.api.letsencrypt.org/directory',
         email: 'rusbogdanclaudiu@gmail.com',
         agreeTos: true, 
         approveDomains: [ 'voyc.eu' ], 
