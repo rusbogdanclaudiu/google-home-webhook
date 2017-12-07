@@ -11,15 +11,15 @@ var localStaticServePath = process.env.SNAP_COMMON || process.env.HOME;
 localStaticServePath += '/voyc-static-content';
 app.use(express.static(localStaticServePath));
 
-if(!process.env.DISABLE_GO_DADDY) {
+if(!process.env.LOCAL_TEST_SERVER) {
     var godaddy = require('./godaddy');
     app.use('/godaddy/', godaddy);
     godaddy.startWatchdog('http://voyc.eu/godaddy/', 15000);
     //godaddy.startWatchdog('http://127.0.0.1/godaddy/', 100);    
 }
 
-var letsencrypt = require('./letsencrypt');
-letsencrypt.init(app);
+var vWeb = require('./voyc-webserver');
+vWeb.init(app);
 
 app.use(bodyParser.json());
 
@@ -54,6 +54,19 @@ app.post('/hook', function (req, res) {
     }
 });
 
-app.listen((process.env.PORT || 80), function () {
-    console.log("Server listening");
-});
+
+if(process.env.LOCAL_TEST_SERVER) {
+    app.listen((process.env.PORT || 80), function () {
+        console.log("Server listening");
+    });
+} else {
+    //https://git.daplie.com/Daplie/greenlock-express
+    require('greenlock-express').create({
+        server: 'staging',
+        email: 'rusbogdanclaudiu@gmail.com',
+        agreeTos: true, 
+        approveDomains: [ 'voyc.eu' ], 
+        app: app    
+    }).listen(80, 443);
+        
+}

@@ -8,13 +8,14 @@
   "bin": "./index.js",
   "main": "./index.js",
   "scripts": {
-    "start" : "PORT=8080 node index.js",
-    "http-nat-setup" : "sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080",
-    "reset-A-record" : "/bin/sh godaddy.sh ~/godaddy.token"
+    "start": "PORT=8080 node index.js",
+    "http-nat-setup": "sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080",
+    "reset-A-record": "/bin/sh godaddy.sh ~/godaddy.token"
   },
- "dependencies": {
-    "rconsole": "*",
+  "dependencies": {
     "body-parser": "^1.15.0",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "greenlock-express": "^2.0.12",
+    "rconsole": "*"
   }
 }
