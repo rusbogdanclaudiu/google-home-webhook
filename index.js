@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+console.log ('Starting with current environment: ' + JSON.stringify(process.env));
+
 var localStaticServePath = process.env.SNAP_COMMON || process.env.HOME;
 localStaticServePath += '/voyc-static-content';
 app.use(express.static(localStaticServePath));
