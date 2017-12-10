@@ -63,16 +63,7 @@ if(process.env.LOCAL_TEST_SERVER) {
     });
 } else {
     //https://git.daplie.com/Daplie/greenlock-express
-    //testing server: staging
-    /*require('greenlock-express').create({
-        server: 'https://acme-v01.api.letsencrypt.org/directory',
-        email: 'rusbogdanclaudiu@gmail.com',
-        agreeTos: true, 
-        approveDomains: [ 'voyc.eu' ], 
-        app: app    
-    }).listen(80, 443);
-      */  
-
+    
     var path = process.env.SNAP_COMMON || '~';
     path += '/letsencrypt';
 
@@ -83,21 +74,22 @@ if(process.env.LOCAL_TEST_SERVER) {
        
         // The domains being approved for the first time are listed in opts.domains
         // Certs being renewed are listed in certs.altnames
-        if (certs) {
+        /*if (certs) {
           opts.domains = certs.altnames;
         }
         else {
           opts.email = 'rusbogdanclaudiu@gmail.com';
           opts.agreeTos = true;
-        }
+        }*/
+
+        opts.domain = 'voyc.eu';
+        opts.domains = ['voyc.eu', 'www.voyc.eu'];
+        opts.email = 'rusbogdanclaudiu@gmail.com'
+        opts.agreeTos  = true;
        
         // NOTE: you can also change other options such as `challengeType` and `challenge`
         // opts.challengeType = 'http-01';
-        // opts.challenge = require('le-challenge-fs').create({});
-
-        console.log('opts: '  + JSON.stringify(opts));
-        console.log('certs: '  + JSON.stringify(certs));
-       
+        // opts.challenge = require('le-challenge-fs').create({});       
         cb(null, { options: opts, certs: certs });
     }
 
@@ -106,7 +98,7 @@ if(process.env.LOCAL_TEST_SERVER) {
     var lex = require('greenlock-express').create({
         // set to https://acme-v01.api.letsencrypt.org/directory in production
         //server: 'staging'
-        server : 'https://acme-v01.api.letsencrypt.org/directory'
+        server : 'production'
     
     // If you wish to replace the default plugins, you may do so here
     //
